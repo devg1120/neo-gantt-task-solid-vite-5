@@ -1,4 +1,4 @@
-import { Gantt, type Task, ViewMode } from './gantt/index.js'
+import { Gantt, GanttScrollSync, type Task, ViewMode } from './gantt/index.js'
 import type { ScrollSyncSig } from './gantt/types/public-types'
 import { ViewSwitcher } from './components/view-switcher'
 import { getStartEndDateForProject, initTasks } from './helper2'
@@ -183,7 +183,7 @@ const App = () => {
         showFromTo={showFromTo}
         setShowFromTo={setShowFromTo}
       />
-      {/*
+     
             <h3>Gantt With Unlimited Height</h3>
             <Gantt
 	        key={key()}
@@ -197,18 +197,18 @@ const App = () => {
                 onClick={handleClick}
                 onSelect={handleSelect}
                 onExpanderClick={handleExpanderClick}
-                listCellWidth={isChecked() ? "155px" : ""3
-                //ganttHeight={300}
+                listCellWidth={listWidth}
+                ganttHeight={300}
                 headerHeight={headerHeight}
                 columnWidth={columnWidth()}
                 rowHeight={rowHeight}
                 showFromTo={showFromTo}
             />
-*/}
-      <h3>Gantt With Limited Height1</h3>
+
+      <h3>ScrollSync Gantt With Limited Height1</h3>
       <For each={key()}>
         {() => (
-          <Gantt
+          <GanttScrollSync
             id={2}
             tasks={tasks}
             viewMode={view()}
@@ -237,8 +237,8 @@ const App = () => {
         )}
       </For>
 
-      <h3>Gantt With Limited Height2</h3>
-      <Gantt
+      <h3>ScrollSync Gantt With Limited Height2</h3>
+      <GanttScrollSync
         id={3}
         tasks={tasks}
         viewMode={view()}
@@ -250,7 +250,7 @@ const App = () => {
         onSelect={handleSelect}
         onExpanderClick={handleExpanderClick}
         listCellWidth={listWidth}
-        ganttHeight={200}
+        ganttHeight={300}
         headerHeight={headerHeight}
         columnWidth={columnWidth()}
         rowHeight={rowHeight}

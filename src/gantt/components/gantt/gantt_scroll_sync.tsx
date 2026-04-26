@@ -19,7 +19,7 @@ import styles from './gantt.module.css'
 import { TaskGantt } from './task-gantt'
 import type { TaskGanttContentProps } from './task-gantt-content'
 
-export const Gantt: Component<GanttProps> = ({
+export const GanttScrollSync: Component<GanttProps> = ({
   id = 0,
   //tasks = [],
   tasks,
@@ -71,10 +71,10 @@ export const Gantt: Component<GanttProps> = ({
  // onScrollY,
  // syncScrollX,
  // syncScrollY,
- // __scrollX, 
- // setScrollX,
- // __scrollY,
- // setScrollY,
+  __scrollX, 
+  setScrollX,
+  __scrollY,
+  setScrollY,
  
 }) => {
   const createDefaultDates = () => {
@@ -132,8 +132,8 @@ export const Gantt: Component<GanttProps> = ({
 
   const ganttFullHeight = tasks().length * rowHeight
 
-  const [__scrollY, setScrollY] = createSignal(0)
-  const [__scrollX, setScrollX] = createSignal(-1)
+  //const [__scrollY, setScrollY] = createSignal(0)
+  //const [__scrollX, setScrollX] = createSignal(-1)
 
   const [__syncScrollX_OLD, setSyncScrollX_OLD] = createSignal(0)
   const [__syncScrollY_OLD, setSyncScrollY_OLD] = createSignal(0)
