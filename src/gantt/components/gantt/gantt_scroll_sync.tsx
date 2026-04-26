@@ -75,6 +75,8 @@ export const GanttScrollSync: Component<GanttProps> = ({
   setScrollX,
   __scrollY,
   setScrollY,
+  enableVscroll = false,
+  enableHscroll = false
  
 }) => {
   const createDefaultDates = () => {
@@ -617,7 +619,7 @@ export const GanttScrollSync: Component<GanttProps> = ({
             svgWidth={svgWidth}
           />
         )}
-
+{ enableVscroll  && (
         <VerticalScroll
           ganttFullHeight={ganttFullHeight}
           ganttHeight={ganttHeight}
@@ -626,7 +628,10 @@ export const GanttScrollSync: Component<GanttProps> = ({
           onScroll={handleScrollY}
           rtl={rtl}
         />
+)}
+
       </div>
+{ enableHscroll  && (
       <HorizontalScroll
         svgWidth={svgWidth}
         taskListWidth={__taskListWidth}
@@ -634,6 +639,7 @@ export const GanttScrollSync: Component<GanttProps> = ({
         rtl={rtl}
         onScroll={handleScrollX}
       />
+)}
     </div>
   )
 }

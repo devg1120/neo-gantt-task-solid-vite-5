@@ -233,6 +233,8 @@ const App = () => {
   setScrollX={setScrollX}
   __scrollY={__scrollY}
   setScrollY={setScrollY}
+  enableVscroll={true}
+  enableHscroll={true}
           />
         )}
       </For>
