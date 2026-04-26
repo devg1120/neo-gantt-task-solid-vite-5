@@ -147,6 +147,10 @@ const App = () => {
   }
   const [showFromTo, setShowFromTo] = createSignal(false)
 
+  const [__scrollY, setScrollY] = createSignal(0)
+  const [__scrollX, setScrollX] = createSignal(-1)
+
+/*
   const [syncScrollX, setSyncScrollX] = createSignal<ScrollSyncSig>({
     sid: 0,
     num: 0,
@@ -157,11 +161,14 @@ const App = () => {
   })
 
   const onScrollX = (sig: ScrollSyncSig) => {
+  console.log("onScrollX", sig);
     setSyncScrollX(sig)
   }
   const onScrollY = (sig: ScrollSyncSig) => {
+  console.log("onScrollY", sig);
     setSyncScrollY(sig)
   }
+*/
 
   return (
     <div class="Wrapper">
@@ -218,10 +225,14 @@ const App = () => {
             columnWidth={columnWidth()}
             rowHeight={rowHeight}
             showFromTo={showFromTo}
-            onScrollX={onScrollX}
-            onScrollY={onScrollY}
-            syncScrollX={syncScrollX()}
-            syncScrollY={syncScrollY()}
+            //onScrollX={onScrollX}
+            //onScrollY={onScrollY}
+            //syncScrollX={syncScrollX()}
+            //syncScrollY={syncScrollY()}
+  __scrollX={__scrollX}
+  setScrollX={setScrollX}
+  __scrollY={__scrollY}
+  setScrollY={setScrollY}
           />
         )}
       </For>
@@ -244,10 +255,14 @@ const App = () => {
         columnWidth={columnWidth()}
         rowHeight={rowHeight}
         showFromTo={showFromTo}
-        onScrollX={onScrollX}
-        onScrollY={onScrollY}
-        syncScrollX={syncScrollX()}
-        syncScrollY={syncScrollY()}
+        //onScrollX={onScrollX}
+        //onScrollY={onScrollY}
+        //syncScrollX={syncScrollX()}
+        //syncScrollY={syncScrollY()}
+  __scrollX={__scrollX}
+  setScrollX={setScrollX}
+  __scrollY={__scrollY}
+  setScrollY={setScrollY}
       />
     </div>
   )

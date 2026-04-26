@@ -67,10 +67,15 @@ export const Gantt: Component<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
-  onScrollX,
-  onScrollY,
-  syncScrollX,
-  syncScrollY,
+ // onScrollX,
+ // onScrollY,
+ // syncScrollX,
+ // syncScrollY,
+  __scrollX, 
+  setScrollX,
+  __scrollY,
+  setScrollY,
+ 
 }) => {
   const createDefaultDates = () => {
     const today = new Date()
@@ -127,8 +132,8 @@ export const Gantt: Component<GanttProps> = ({
 
   const ganttFullHeight = tasks().length * rowHeight
 
-  const [__scrollY, setScrollY] = createSignal(0)
-  const [__scrollX, setScrollX] = createSignal(-1)
+  //const [__scrollY, setScrollY] = createSignal(0)
+  //const [__scrollX, setScrollX] = createSignal(-1)
 
   const [__syncScrollX_OLD, setSyncScrollX_OLD] = createSignal(0)
   const [__syncScrollY_OLD, setSyncScrollY_OLD] = createSignal(0)
@@ -329,7 +334,7 @@ export const Gantt: Component<GanttProps> = ({
       wrapperRef?.removeEventListener('wheel', handleWheel)
     }
   })
-
+/*
   createEffect(() => {
     if (onScrollY) {
       //onScrollY(scrollY)
@@ -343,7 +348,7 @@ export const Gantt: Component<GanttProps> = ({
       onScrollX({ sid: id, num: __scrollX() })
     }
   })
-
+*/
   /*
     createEffect(() => {
         //console.log("syncScrollX", syncScrollX)
@@ -410,7 +415,7 @@ export const Gantt: Component<GanttProps> = ({
 
   const handleScrollY = (event: SyntheticEvent) => {
     if (__scrollY() !== event.currentTarget.scrollTop && !__ignoreScrollEvent()) {
-      console.log('sclollY', event.currentTarget.scrollTop)
+      //console.log(id, 'sclollY', event.currentTarget.scrollTop)
       setScrollY(event.currentTarget.scrollTop)
       setIgnoreScrollEvent(true)
     } else {
@@ -420,6 +425,7 @@ export const Gantt: Component<GanttProps> = ({
 
   const handleScrollX = (event: SyntheticEvent) => {
     if (__scrollX() !== event.currentTarget.scrollLeft && !__ignoreScrollEvent()) {
+      //console.log(id, 'sclollX', event.currentTarget.scrollLeft)
       setScrollX(event.currentTarget.scrollLeft)
       setIgnoreScrollEvent(true)
     } else {
