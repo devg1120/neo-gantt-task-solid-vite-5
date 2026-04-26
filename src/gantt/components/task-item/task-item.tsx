@@ -1,231 +1,119 @@
-import type { BarTask } from "../../types/bar-task";
-import type { GanttContentMoveAction } from "../../types/gantt-task-actions";
-import  { Bar } from "./bar/bar";
-import  { BarSmall } from "./bar/bar-small";
-import  { Milestone } from "./milestone/milestone";
-import  { Project } from "./project/project";
-import style from "./task-list.module.css";
-import { createEffect, on, createSignal } from "solid-js";
+import type { BarTask } from '../../types/bar-task'
+import type { GanttContentMoveAction } from '../../types/gantt-task-actions'
+import { Bar } from './bar/bar'
+import { BarSmall } from './bar/bar-small'
+import { Milestone } from './milestone/milestone'
+import { Project } from './project/project'
+import style from './task-list.module.css'
+import { createEffect, on, createSignal } from 'solid-js'
 
 export type TaskItemProps = {
-    task: BarTask;
-    arrowIndent: number;
-    taskHeight: number;
-    isProgressChangeable: boolean;
-    isDateChangeable: boolean;
-    isDelete: boolean;
-    isSelected: boolean;
-    rtl: boolean;
-    onEventStart: (
-        action: GanttContentMoveAction,
-        selectedTask: BarTask,
-        event?: React.MouseEvent | React.KeyboardEvent,
-    ) => any;
-};
+  task: BarTask
+  arrowIndent: number
+  taskHeight: number
+  isProgressChangeable: boolean
+  isDateChangeable: boolean
+  isDelete: boolean
+  isSelected: boolean
+  rtl: boolean
+  onEventStart: (
+    action: GanttContentMoveAction,
+    selectedTask: BarTask,
+    event?: React.MouseEvent | React.KeyboardEvent,
+  ) => any
+}
 
 export const TaskItem: Component<TaskItemProps> = (props) => {
-    const {
-        task,
-        arrowIndent,
-        isDelete,
-        taskHeight,
-        isSelected,
-        rtl,
-        onEventStart,
-    } = {
-        ...props,
-    };
+  const { task, arrowIndent, isDelete, taskHeight, isSelected, rtl, onEventStart } = {
+    ...props,
+  }
 
-/*
-     console.log(
-        task,
-        //arrowIndent,
-        //isDelete,
-        //taskHeight,
-        //isSelected,
-        //rtl
-	);
-*/
+  let textRef: SVGTextElement
+  const [taskItem, setTaskItem] = createSignal<JSX.Element>(<div />)
+  const [isTextInside, setIsTextInside] = createSignal(false)
 
-    //const textRef = useRef<SVGTextElement>(null);
-    let textRef :SVGTextElement;
-    const [taskItem, setTaskItem] = createSignal<JSX.Element>(<div />);
-    const [isTextInside, setIsTextInside] = createSignal(false);
-
-    createEffect(on(
-        () => [task, isSelected],
-        () => {
-            switch (task.typeInternal) {
-                case "milestone":
-                    setTaskItem(<Milestone {...props} />);
-                    break;
-                case "project":
-                    setTaskItem(<Project {...props} />);
-                    break;
-                case "smalltask":
-                    setTaskItem(<BarSmall {...props} />);
-                    break;
-                default:
-                    setTaskItem(<Bar {...props} />);
-                    break;
-            }
+  createEffect(
+    on(
+      () => [task, isSelected],
+      () => {
+        switch (task.typeInternal) {
+          case 'milestone':
+            setTaskItem(<Milestone {...props} />)
+            break
+          case 'project':
+            setTaskItem(<Project {...props} />)
+            break
+          case 'smalltask':
+            setTaskItem(<BarSmall {...props} />)
+            break
+          default:
+            setTaskItem(<Bar {...props} />)
+            break
         }
-    ));
+      },
+    ),
+  )
 
-    createEffect(on(
-        () => [textRef, task],
-        () => {
-            if (textRef) {
-                setIsTextInside(
-                    textRef.getBoundingClientRect().width < task.x2 - task.x1,
-                );
-            }
+  createEffect(
+    on(
+      () => [textRef, task],
+      () => {
+        if (textRef) {
+          setIsTextInside(textRef.getBoundingClientRect().width < task.x2 - task.x1)
         }
-    ));
+      },
+    ),
+  )
 
-    const getX = () => {
-        const width = task.x2 - task.x1;
-        const hasChild = task.barChildren.length > 0;
-        if (isTextInside()) {
-            return task.x1 + width * 0.5;
+  const getX = () => {
+    const width = task.x2 - task.x1
+    const hasChild = task.barChildren.length > 0
+    if (isTextInside()) {
+      return task.x1 + width * 0.5
+    }
+    if (rtl && textRef) {
+      return task.x1 - textRef.getBBox().width - arrowIndent * +hasChild - arrowIndent * 0.2
+    } else {
+      return task.x1 + width + arrowIndent * +hasChild + arrowIndent * 0.2
+    }
+  }
+
+  return (
+    <g
+      onKeyDown={(e) => {
+        switch (e.key) {
+          case 'Delete': {
+            if (isDelete) onEventStart('delete', task, e)
+            break
+          }
         }
-        if (rtl && textRef) {
-            return (
-                task.x1 -
-                textRef.getBBox().width -
-                arrowIndent * +hasChild -
-                arrowIndent * 0.2
-            );
-        } else {
-            return task.x1 + width + arrowIndent * +hasChild + arrowIndent * 0.2;
-        }
-    };
-
-//console.log(task);
-//console.log(getX(), task.y, taskHeight);
-
-//taskHeight = 20;
-
-/*
-return (
-  <circle
-                cx={getX()  }
-                cy={ task.y + taskHeight * 0.5  }
-		r="10"
-		stroke="black" 
-		/>
-)
-*/
-/*
-return (
-            <text
-                x={getX()}
-                y={task.y + taskHeight * 0.5}
-                class={
-                        style.barLabel && style.barLabelOutside
-                }
-                ref={textRef}
-            >
-                {task.name}
-            </text>
-)
-*/
-
-/*
-return (
-  <circle cx="150" cy="20" r="10" stroke="black" fill="none"/>
-);
-*/
-
-/*
-    return (
-
-        <g
-            onKeyDown={(e) => {
-                switch (e.key) {
-                    case "Delete": {
-                        if (isDelete) onEventStart("delete", task, e);
-                        break;
-                    }
-                }
-                e.stopPropagation();
-            }}
-            onMouseEnter={(e) => {
-                onEventStart("mouseenter", task, e);
-            }}
-            onMouseLeave={(e) => {
-                onEventStart("mouseleave", task, e);
-            }}
-            onDoubleClick={(e) => {
-                onEventStart("dblclick", task, e);
-            }}
-            onClick={(e) => {
-                onEventStart("click", task, e);
-            }}
-            onFocus={() => {
-                onEventStart("select", task);
-            }}
-        >
-            {taskItem()}
-            <text
-                x={getX()}
-                y={task.y + taskHeight * 0.5}
-                class={
-                    isTextInside()
-                        ? style.barLabel
-                        : style.barLabel && style.barLabelOutside
-                }
-                ref={textRef}
-            >
-                {task.name}
-            </text>
-        </g>
-    );
-
-*/
-
-    return (
-
-        <g
-            onKeyDown={(e) => {
-                switch (e.key) {
-                    case "Delete": {
-                        if (isDelete) onEventStart("delete", task, e);
-                        break;
-                    }
-                }
-                e.stopPropagation();
-            }}
-            onMouseEnter={(e) => {
-                onEventStart("mouseenter", task, e);
-            }}
-            onMouseLeave={(e) => {
-                onEventStart("mouseleave", task, e);
-            }}
-            onDoubleClick={(e) => {
-                onEventStart("dblclick", task, e);
-            }}
-            onClick={(e) => {
-                onEventStart("click", task, e);
-            }}
-            onFocus={() => {
-                onEventStart("select", task);
-            }}
-        >
-            {taskItem()}
-            <text
-                x={getX()}
-                y={task.y + taskHeight * 0.5}
-                class={
-                    isTextInside()
-                        ? style.barLabel
-                        : style.barLabel && style.barLabelOutside
-                }
-                ref={textRef}
-            >
-                {task.name}
-            </text>
-        </g>
-    );
-
-};
+        e.stopPropagation()
+      }}
+      onMouseEnter={(e) => {
+        onEventStart('mouseenter', task, e)
+      }}
+      onMouseLeave={(e) => {
+        onEventStart('mouseleave', task, e)
+      }}
+      onDoubleClick={(e) => {
+        onEventStart('dblclick', task, e)
+      }}
+      onClick={(e) => {
+        onEventStart('click', task, e)
+      }}
+      onFocus={() => {
+        onEventStart('select', task)
+      }}
+    >
+      {taskItem()}
+      <text
+        x={getX()}
+        y={task.y + taskHeight * 0.5}
+        class={isTextInside() ? style.barLabel : style.barLabel && style.barLabelOutside}
+        ref={textRef}
+      >
+        {task.name}
+      </text>
+    </g>
+  )
+}

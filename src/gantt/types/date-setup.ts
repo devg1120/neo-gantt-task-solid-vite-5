@@ -1,6 +1,6 @@
-import type { ViewModeEnum } from "./public-types";
+import type { ViewModeEnum } from './public-types'
 
 export interface DateSetup {
-    dates: Date[];
-    viewMode: ViewModeEnum;
+  dates: Date[]
+  viewMode: ViewModeEnum
 }

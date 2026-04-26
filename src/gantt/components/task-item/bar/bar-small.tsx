@@ -1,48 +1,43 @@
-import { getProgressPoint } from "../../../helpers/bar-helper";
-import type { TaskItemProps } from "../task-item";
-import { BarDisplay } from "./bar-display";
-import { BarProgressHandle } from "./bar-progress-handle";
-import styles from "./bar.module.css";
+import { getProgressPoint } from '../../../helpers/bar-helper'
+import type { TaskItemProps } from '../task-item'
+import { BarDisplay } from './bar-display'
+import { BarProgressHandle } from './bar-progress-handle'
+import styles from './bar.module.css'
 
 export const BarSmall: Component<TaskItemProps> = ({
-    task,
-    isProgressChangeable,
-    isDateChangeable,
-    onEventStart,
-    isSelected,
+  task,
+  isProgressChangeable,
+  isDateChangeable,
+  onEventStart,
+  isSelected,
 }) => {
-    const progressPoint = getProgressPoint(
-        task.progressWidth + task.x1,
-        task.y,
-        task.height,
-    );
-    //console.log("var small*", task.x2 - task.x1, task.height());
-    return (
-        <g class={styles.barWrapper} tabIndex={0}>
-            <BarDisplay
-                x={task.x1}
-                y={task.y}
-                width={task.x2 - task.x1 }
-                height={task.height()}
-                progressX={task.progressX}
-                progressWidth={task.progressWidth}
-                barCornerRadius={task.barCornerRadius}
-                styles={task.styles}
-                isSelected={isSelected}
-                onMouseDown={(e) => {
-                    isDateChangeable && onEventStart("move", task, e);
-                }}
-            />
-            <g class="handleGroup">
-                {isProgressChangeable && (
-                    <BarProgressHandle
-                        progressPoint={progressPoint}
-                        onMouseDown={(e) => {
-                            onEventStart("progress", task, e);
-                        }}
-                    />
-                )}
-            </g>
-        </g>
-    );
-};
+  const progressPoint = getProgressPoint(task.progressWidth + task.x1, task.y, task.height)
+  return (
+    <g class={styles.barWrapper} tabIndex={0}>
+      <BarDisplay
+        x={task.x1}
+        y={task.y}
+        width={task.x2 - task.x1}
+        height={task.height()}
+        progressX={task.progressX}
+        progressWidth={task.progressWidth}
+        barCornerRadius={task.barCornerRadius}
+        styles={task.styles}
+        isSelected={isSelected}
+        onMouseDown={(e) => {
+          isDateChangeable && onEventStart('move', task, e)
+        }}
+      />
+      <g class="handleGroup">
+        {isProgressChangeable && (
+          <BarProgressHandle
+            progressPoint={progressPoint}
+            onMouseDown={(e) => {
+              onEventStart('progress', task, e)
+            }}
+          />
+        )}
+      </g>
+    </g>
+  )
+}

@@ -1,156 +1,153 @@
-import type { TaskListHeaderProps } from "../components/task-list/task-list-header";
-import type { TaskListTableProps } from "../components/task-list/task-list-table";
-import type { Component } from 'solid-js';
+import type { TaskListHeaderProps } from '../components/task-list/task-list-header'
+import type { TaskListTableProps } from '../components/task-list/task-list-table'
+import type { Component } from 'solid-js'
 
 export enum ViewModeEnum {
-    Hour = "Hour",
-    QuarterDay = "Quarter Day",
-    HalfDay = "Half Day",
-    Day = "Day",
-    /** ISO-8601 week */
-    Week = "Week",
-    Month = "Month",
-    QuarterYear = "QuarterYear",
-    Year = "Year",
+  Hour = 'Hour',
+  QuarterDay = 'Quarter Day',
+  HalfDay = 'Half Day',
+  Day = 'Day',
+  /** ISO-8601 week */
+  Week = 'Week',
+  Month = 'Month',
+  QuarterYear = 'QuarterYear',
+  Year = 'Year',
 }
 
 export type ScrollSyncSig = {
-    sid: Int;
-    num: number;
+  sid: Int
+  num: number
 }
 
 export type ViewMode =
-    | "Hour"
-    | "Quarter Day"
-    | "Half Day"
-    | "Day"
-    | "Week" // ISO-8601 week
-    | "Month"
-    | "Quarter Year"
-    | "Year";
+  | 'Hour'
+  | 'Quarter Day'
+  | 'Half Day'
+  | 'Day'
+  | 'Week' // ISO-8601 week
+  | 'Month'
+  | 'Quarter Year'
+  | 'Year'
 
-export type TaskType = "task" | "milestone" | "project";
+export type TaskType = 'task' | 'milestone' | 'project'
 export interface Task {
-    id: string;
-    type: TaskType;
-    name: string;
-    start: Date;
-    end: Date;
-    /**
-     * From 0 to 100
-     */
-    progress: number;
-    styles?: {
-        backgroundColor?: string;
-        backgroundSelectedColor?: string;
-        progressColor?: string;
-        progressSelectedColor?: string;
-    };
-    isDisabled?: boolean;
-    project?: string;
-    dependencies?: string[];
-    hideChildren?: boolean;
-    displayOrder?: number;
-    url?: string;
+  id: string
+  type: TaskType
+  name: string
+  start: Date
+  end: Date
+  /**
+   * From 0 to 100
+   */
+  progress: number
+  styles?: {
+    backgroundColor?: string
+    backgroundSelectedColor?: string
+    progressColor?: string
+    progressSelectedColor?: string
+  }
+  isDisabled?: boolean
+  project?: string
+  dependencies?: string[]
+  hideChildren?: boolean
+  displayOrder?: number
+  url?: string
 }
 
 export interface EventOption {
-    /**
-     * Time step value for date changes.
-     */
-    timeStep?: number;
-    /**
-     * Invokes on bar select on unselect.
-     */
-    onSelect?: (task: Task, isSelected: boolean) => void;
-    /**
-     * Invokes on bar double click.
-     */
-    onDoubleClick?: (task: Task) => void;
-    /**
-     * Invokes on bar click.
-     */
-    onClick?: (task: Task) => void;
-    /**
-     * Invokes on end and start time change. Chart undoes operation if method return false or error.
-     */
-    onDateChange?: (
-        task: Task,
-        children: Task[],
-    ) => void | boolean | Promise<void> | Promise<boolean>;
-    /**
-     * Invokes on progress change. Chart undoes operation if method return false or error.
-     */
-    onProgressChange?: (
-        task: Task,
-        children: Task[],
-    ) => void | boolean | Promise<void> | Promise<boolean>;
-    /**
-     * Invokes on delete selected task. Chart undoes operation if method return false or error.
-     */
-    onDelete?: (task: Task) => void | boolean | Promise<void> | Promise<boolean>;
-    /**
-     * Invokes on expander on task list
-     */
-    onExpanderClick?: (task: Task) => void;
+  /**
+   * Time step value for date changes.
+   */
+  timeStep?: number
+  /**
+   * Invokes on bar select on unselect.
+   */
+  onSelect?: (task: Task, isSelected: boolean) => void
+  /**
+   * Invokes on bar double click.
+   */
+  onDoubleClick?: (task: Task) => void
+  /**
+   * Invokes on bar click.
+   */
+  onClick?: (task: Task) => void
+  /**
+   * Invokes on end and start time change. Chart undoes operation if method return false or error.
+   */
+  onDateChange?: (task: Task, children: Task[]) => void | boolean | Promise<void> | Promise<boolean>
+  /**
+   * Invokes on progress change. Chart undoes operation if method return false or error.
+   */
+  onProgressChange?: (
+    task: Task,
+    children: Task[],
+  ) => void | boolean | Promise<void> | Promise<boolean>
+  /**
+   * Invokes on delete selected task. Chart undoes operation if method return false or error.
+   */
+  onDelete?: (task: Task) => void | boolean | Promise<void> | Promise<boolean>
+  /**
+   * Invokes on expander on task list
+   */
+  onExpanderClick?: (task: Task) => void
 
-    onScrollX?: (num: number) => void;
-    onScrollY?: (num: number) => void;
+  onScrollX?: (num: number) => void
+  onScrollY?: (num: number) => void
 }
 
 export interface DisplayOption {
-    viewMode?: ViewModeEnum;
-    viewDate?: Date;
-    preStepsCount?: number;
-    /**
-     * Specifies the month name language. Able formats: ISO 639-2, Java Locale
-     */
-    locale?: string;
-    rtl?: boolean;
-    showDayOfWeek?: boolean;
-    showFromTo?: boolean;
+  viewMode?: ViewModeEnum
+  viewDate?: Date
+  preStepsCount?: number
+  /**
+   * Specifies the month name language. Able formats: ISO 639-2, Java Locale
+   */
+  locale?: string
+  rtl?: boolean
+  showDayOfWeek?: boolean
+  showFromTo?: boolean
 }
 
 export interface StylingOption {
-    headerHeight?: number;
-    columnWidth?: number;
-    listCellWidth?: string;
-    rowHeight?: number;
-    ganttHeight?: number;
-    barCornerRadius?: number;
-    handleWidth?: number;
-    fontFamily?: string;
-    fontSize?: string;
-    /**
-     * How many of row width can be taken by task.
-     * From 0 to 100
-     */
-    barFill?: number;
-    barProgressColor?: string;
-    barProgressSelectedColor?: string;
-    barBackgroundColor?: string;
-    barBackgroundSelectedColor?: string;
-    projectProgressColor?: string;
-    projectProgressSelectedColor?: string;
-    projectBackgroundColor?: string;
-    projectBackgroundSelectedColor?: string;
-    milestoneBackgroundColor?: string;
-    milestoneBackgroundSelectedColor?: string;
-    arrowColor?: string;
-    arrowIndent?: number;
-    todayColor?: string;
-    TooltipContent?: Component<{
-        task: Task;
-        fontSize: string;
-        fontFamily: string;
-    }>;
-    TaskListHeader?: Component<TaskListHeaderProps>;
-    TaskListTable?: Component<TaskListTableProps>;
+  headerHeight?: number
+  columnWidth?: number
+  listCellWidth?: string
+  rowHeight?: number
+  ganttHeight?: number
+  barCornerRadius?: number
+  handleWidth?: number
+  fontFamily?: string
+  fontSize?: string
+  /**
+   * How many of row width can be taken by task.
+   * From 0 to 100
+   */
+  barFill?: number
+  barProgressColor?: string
+  barProgressSelectedColor?: string
+  barBackgroundColor?: string
+  barBackgroundSelectedColor?: string
+  projectProgressColor?: string
+  projectProgressSelectedColor?: string
+  projectBackgroundColor?: string
+  projectBackgroundSelectedColor?: string
+  milestoneBackgroundColor?: string
+  milestoneBackgroundSelectedColor?: string
+  arrowColor?: string
+  arrowIndent?: number
+  todayColor?: string
+  TooltipContent?: Component<{
+    task: Task
+    fontSize: string
+    fontFamily: string
+  }>
+  TaskListHeader?: Component<TaskListHeaderProps>
+  TaskListTable?: Component<TaskListTableProps>
 }
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
-    id: Int;
-    tasks: Task[];
-    syncScrollX?: number;
-    syncScrollY?: number;
+  id: Int
+  tasks: Task[]
+  syncScrollX?: number
+  syncScrollY?: number
 }
