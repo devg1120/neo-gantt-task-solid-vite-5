@@ -67,15 +67,14 @@ export const Gantt: Component<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
- // onScrollX,
- // onScrollY,
- // syncScrollX,
- // syncScrollY,
- // __scrollX, 
- // setScrollX,
- // __scrollY,
- // setScrollY,
- 
+  // onScrollX,
+  // onScrollY,
+  // syncScrollX,
+  // syncScrollY,
+  // __scrollX,
+  // setScrollX,
+  // __scrollY,
+  // setScrollY,
 }) => {
   const createDefaultDates = () => {
     const today = new Date()
@@ -334,7 +333,7 @@ export const Gantt: Component<GanttProps> = ({
       wrapperRef?.removeEventListener('wheel', handleWheel)
     }
   })
-/*
+  /*
   createEffect(() => {
     if (onScrollY) {
       //onScrollY(scrollY)

@@ -67,17 +67,16 @@ export const GanttScrollSync: Component<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
- // onScrollX,
- // onScrollY,
- // syncScrollX,
- // syncScrollY,
-  __scrollX, 
+  // onScrollX,
+  // onScrollY,
+  // syncScrollX,
+  // syncScrollY,
+  __scrollX,
   setScrollX,
   __scrollY,
   setScrollY,
   enableVscroll = false,
-  enableHscroll = false
- 
+  enableHscroll = false,
 }) => {
   const createDefaultDates = () => {
     const today = new Date()
@@ -336,7 +335,7 @@ export const GanttScrollSync: Component<GanttProps> = ({
       wrapperRef?.removeEventListener('wheel', handleWheel)
     }
   })
-/*
+  /*
   createEffect(() => {
     if (onScrollY) {
       //onScrollY(scrollY)
@@ -619,27 +618,26 @@ export const GanttScrollSync: Component<GanttProps> = ({
             svgWidth={svgWidth}
           />
         )}
-{ enableVscroll  && (
-        <VerticalScroll
-          ganttFullHeight={ganttFullHeight}
-          ganttHeight={ganttHeight}
-          headerHeight={headerHeight}
-          scroll={__scrollY()}
-          onScroll={handleScrollY}
-          rtl={rtl}
-        />
-)}
-
+        {enableVscroll && (
+          <VerticalScroll
+            ganttFullHeight={ganttFullHeight}
+            ganttHeight={ganttHeight}
+            headerHeight={headerHeight}
+            scroll={__scrollY()}
+            onScroll={handleScrollY}
+            rtl={rtl}
+          />
+        )}
       </div>
-{ enableHscroll  && (
-      <HorizontalScroll
-        svgWidth={svgWidth}
-        taskListWidth={__taskListWidth}
-        scroll={__scrollX()}
-        rtl={rtl}
-        onScroll={handleScrollX}
-      />
-)}
+      {enableHscroll && (
+        <HorizontalScroll
+          svgWidth={svgWidth}
+          taskListWidth={__taskListWidth}
+          scroll={__scrollX()}
+          rtl={rtl}
+          onScroll={handleScrollX}
+        />
+      )}
     </div>
   )
 }

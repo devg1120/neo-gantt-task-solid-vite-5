@@ -150,7 +150,7 @@ const App = () => {
   const [__scrollY, setScrollY] = createSignal(0)
   const [__scrollX, setScrollX] = createSignal(-1)
 
-/*
+  /*
   const [syncScrollX, setSyncScrollX] = createSignal<ScrollSyncSig>({
     sid: 0,
     num: 0,
@@ -183,29 +183,29 @@ const App = () => {
         showFromTo={showFromTo}
         setShowFromTo={setShowFromTo}
       />
-     
-            <h3>Gantt With Unlimited Height</h3>
+
+      <h3>Gantt With Unlimited Height</h3>
       <For each={key()}>
         {() => (
-            <Gantt
-	        key={key()}
-                id={1}
-                tasks={tasks}
-                viewMode={view()}
-                onDateChange={handleTaskChange}
-                onDelete={handleTaskDelete}
-                onProgressChange={handleProgressChange}
-                onDoubleClick={handleDblClick}
-                onClick={handleClick}
-                onSelect={handleSelect}
-                onExpanderClick={handleExpanderClick}
-                listCellWidth={listWidth}
-                ganttHeight={300}
-                headerHeight={headerHeight}
-                columnWidth={columnWidth()}
-                rowHeight={rowHeight}
-                showFromTo={showFromTo}
-            />
+          <Gantt
+            key={key()}
+            id={1}
+            tasks={tasks}
+            viewMode={view()}
+            onDateChange={handleTaskChange}
+            onDelete={handleTaskDelete}
+            onProgressChange={handleProgressChange}
+            onDoubleClick={handleDblClick}
+            onClick={handleClick}
+            onSelect={handleSelect}
+            onExpanderClick={handleExpanderClick}
+            listCellWidth={listWidth}
+            ganttHeight={300}
+            headerHeight={headerHeight}
+            columnWidth={columnWidth()}
+            rowHeight={rowHeight}
+            showFromTo={showFromTo}
+          />
         )}
       </For>
 
@@ -233,12 +233,12 @@ const App = () => {
             //onScrollY={onScrollY}
             //syncScrollX={syncScrollX()}
             //syncScrollY={syncScrollY()}
-  __scrollX={__scrollX}
-  setScrollX={setScrollX}
-  __scrollY={__scrollY}
-  setScrollY={setScrollY}
-  enableVscroll={true}
-  enableHscroll={true}
+            __scrollX={__scrollX}
+            setScrollX={setScrollX}
+            __scrollY={__scrollY}
+            setScrollY={setScrollY}
+            enableVscroll={true}
+            enableHscroll={true}
           />
         )}
       </For>
@@ -246,32 +246,32 @@ const App = () => {
       <h3>ScrollSync Gantt With Limited Height2</h3>
       <For each={key()}>
         {() => (
-      <GanttScrollSync
-        id={3}
-        tasks={tasks}
-        viewMode={view()}
-        onDateChange={handleTaskChange}
-        onDelete={handleTaskDelete}
-        onProgressChange={handleProgressChange}
-        onDoubleClick={handleDblClick}
-        onClick={handleClick}
-        onSelect={handleSelect}
-        onExpanderClick={handleExpanderClick}
-        listCellWidth={listWidth}
-        ganttHeight={300}
-        headerHeight={headerHeight}
-        columnWidth={columnWidth()}
-        rowHeight={rowHeight}
-        showFromTo={showFromTo}
-        //onScrollX={onScrollX}
-        //onScrollY={onScrollY}
-        //syncScrollX={syncScrollX()}
-        //syncScrollY={syncScrollY()}
-  __scrollX={__scrollX}
-  setScrollX={setScrollX}
-  __scrollY={__scrollY}
-  setScrollY={setScrollY}
-      />
+          <GanttScrollSync
+            id={3}
+            tasks={tasks}
+            viewMode={view()}
+            onDateChange={handleTaskChange}
+            onDelete={handleTaskDelete}
+            onProgressChange={handleProgressChange}
+            onDoubleClick={handleDblClick}
+            onClick={handleClick}
+            onSelect={handleSelect}
+            onExpanderClick={handleExpanderClick}
+            listCellWidth={listWidth}
+            ganttHeight={300}
+            headerHeight={headerHeight}
+            columnWidth={columnWidth()}
+            rowHeight={rowHeight}
+            showFromTo={showFromTo}
+            //onScrollX={onScrollX}
+            //onScrollY={onScrollY}
+            //syncScrollX={syncScrollX()}
+            //syncScrollY={syncScrollY()}
+            __scrollX={__scrollX}
+            setScrollX={setScrollX}
+            __scrollY={__scrollY}
+            setScrollY={setScrollY}
+          />
         )}
       </For>
     </div>

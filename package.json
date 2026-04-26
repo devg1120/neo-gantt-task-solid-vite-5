@@ -9,7 +9,7 @@
     "build2": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fmt": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "fmt": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "solid-js": "^1.9.11"
