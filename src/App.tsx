@@ -185,6 +185,8 @@ const App = () => {
       />
      
             <h3>Gantt With Unlimited Height</h3>
+      <For each={key()}>
+        {() => (
             <Gantt
 	        key={key()}
                 id={1}
@@ -204,6 +206,8 @@ const App = () => {
                 rowHeight={rowHeight}
                 showFromTo={showFromTo}
             />
+        )}
+      </For>
 
       <h3>ScrollSync Gantt With Limited Height1</h3>
       <For each={key()}>
@@ -240,6 +244,8 @@ const App = () => {
       </For>
 
       <h3>ScrollSync Gantt With Limited Height2</h3>
+      <For each={key()}>
+        {() => (
       <GanttScrollSync
         id={3}
         tasks={tasks}
@@ -266,6 +272,8 @@ const App = () => {
   __scrollY={__scrollY}
   setScrollY={setScrollY}
       />
+        )}
+      </For>
     </div>
   )
 }
