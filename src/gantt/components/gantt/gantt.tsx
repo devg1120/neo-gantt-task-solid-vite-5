@@ -74,10 +74,6 @@ export const Gantt: Component<GanttProps> = ({
     syncScrollY,
 }) => {
 
-    //console.log(tasks);
-    //console.log(viewMode);
-    //console.log(ganttHeight, listCellWidth());
-
     const createDefaultDates = () => {
         const today = new Date();
         const daysBefore = 7;
@@ -142,12 +138,8 @@ export const Gantt: Component<GanttProps> = ({
     const svgWidth = __dateSetup()().dates.length * columnWidth;
 
     //const ganttFullHeight = __barTasks().length * rowHeight;
-    //console.log(">>>>>>>",__barTasks().length);
-    //console.log(">>>>>>>",ganttFullHeight, rowHeight);
 
     const ganttFullHeight = tasks().length * rowHeight;
-    //console.log(">>>>>>>",tasks().length);
-    //console.log(">>>>>>>",ganttFullHeight, rowHeight);
 
     const [__scrollY, setScrollY] = createSignal(0);
     const [__scrollX, setScrollX] = createSignal(-1);
@@ -215,11 +207,7 @@ export const Gantt: Component<GanttProps> = ({
             setSvgContainerHeight(headerHeight);
             return;
         }
-        //console.log(newBarTasks);
 
-	//for  ( const t of newBarTasks) {
-        //     console.log(t.type, t.y)
-	//}
 	
         setBarTasks(newBarTasks);
     });
@@ -280,16 +268,10 @@ export const Gantt: Component<GanttProps> = ({
         __currentViewDate(),
     ]);
 */
-/*
-    createEffect(() => {
-        console.log("changeTask",  __ganttEvent().changedTask);
-     })
-*/
     const [key, setKey] = createSignal({});
 
     createEffect(() => {
         const { changedTask, action } = __ganttEvent();
-	//console.log("effect", changedTask, action);
 
         if (changedTask) {
             if (action === "delete") {
@@ -317,7 +299,6 @@ export const Gantt: Component<GanttProps> = ({
                         prevStateTask.progress !== changedTask.progress)
                 ) {
                     // actions for change
-                    console.log("actions for change");
 		    setKey([{}]);
                     const newTaskList = __barTasks().map((t) =>
                         t.id === changedTask.id ? changedTask : t,
@@ -355,7 +336,6 @@ export const Gantt: Component<GanttProps> = ({
 
     createEffect(() => {
             let v = listCellWidth();
-	    //console.log("v",v);
 	    if (v == "") {
             setTaskListWidth(0);
 	    } else {
@@ -523,7 +503,6 @@ export const Gantt: Component<GanttProps> = ({
 
     const handleScrollX = (event: SyntheticEvent) => {
         if (__scrollX() !== event.currentTarget.scrollLeft && !__ignoreScrollEvent()) {
-	    console.log("sclollX", event.currentTarget.scrollLeft);
             setScrollX(event.currentTarget.scrollLeft);
             setIgnoreScrollEvent(true);
         } else {

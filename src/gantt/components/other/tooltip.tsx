@@ -41,28 +41,7 @@ export const Tooltip: Component<TooltipProps> = ({
     TooltipContent,
 }) => {
 
-    createEffect(() => {
-        console.log("changeTask",  __ganttEvent().changedTask);
-     })
 
-/*
-console.log("tooltip",
-    //task,
-    __ganttEvent,
-    //rowHeight,
-    //rtl,
-    //svgContainerHeight,
-    //svgContainerWidth,
-    //scrollX(),
-    //scrollY(),
-    //arrowIndent,
-    //fontSize,
-    //fontFamily,
-    //headerHeight,
-    //taskListWidth,
-    //TooltipContent,
-    );
-*/
     //const tooltipRef = useRef<HTMLDivElement | null>(null);
     let tooltipRef :HTMLDivElement;
     const [relatedY, setRelatedY] = createSignal(0);
@@ -110,7 +89,6 @@ console.log("tooltip",
                 }
                 setRelatedY(newRelatedY);
                 setRelatedX(newRelatedX);
-		console.log("setRelated");
             }
      })
 
@@ -172,7 +150,6 @@ console.log("tooltip",
                 }
                 setRelatedY(newRelatedY);
                 setRelatedX(newRelatedX);
-		console.log("setRelated");
             }
         }
     ));
@@ -197,7 +174,6 @@ console.log("tooltip",
 /*
             <TooltipContent task={task} fontSize={fontSize} fontFamily={fontFamily} />
 */
-  console.log("related", relatedX(), relatedY())
     return (
         <div
             ref={tooltipRef}

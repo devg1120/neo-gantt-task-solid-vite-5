@@ -134,9 +134,7 @@ console.log(
             };
 
             const handleMouseUp = async (event: MouseEvent) => {
-                //console.log("handleMouseUp");
                 const { action, originalSelectedTask, changedTask } = __ganttEvent();
-                console.log("handleMouseUp action", action);
 /* GUSA
                 if (!changedTask || !point || !svg || !originalSelectedTask)
                     return;
@@ -176,13 +174,11 @@ console.log(
                     //isNotLikeOriginal
                     onDateChange 
                 ) {
-		    console.log("=========================");
                     try {
                         const result = await onDateChange(
                             newChangedTask,
                             newChangedTask.barChildren,
                         );
-		        console.log("onDateChange", result);
                         if (result !== undefined) {
                             operationSuccess = result;
                         }
@@ -286,7 +282,6 @@ console.log(
                 svg.getScreenCTM()?.inverse(),
             );
             setInitEventX1Delta(cursor.x - task.x1);
-            console.log("delta", cursor.x - task.x1);
             setGanttEvent({
                 action,
                 changedTask: task,
